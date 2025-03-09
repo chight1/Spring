@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Live Ping Monitor</title>
+</head>
+<body>
+	<h2>Incoming Pings:</h2>
+	<ul id="pings"></ul>
+	<script>
+		const ws = new WebSocket('ws://' + window.location.hostname + ':6789');
+		ws.onmessage = (event) => {
+			const pings = document.getElementById('pings');
+			const entry = document.createElement('li');
+			entry.textContent = event.data;
+			pings.prepend(entry);
+		};
+	</script>
+</body>
+</html>
